@@ -29,7 +29,10 @@ jobs:
 
       - name: Run frontend tests
         working-directory: frontend
-        run: npm run test:e2e
+        run: |
+          npx playwright install
+          npx playwright install-deps
+          npm run test:e2e
 
   backend:
     name: Backend Build & Test
