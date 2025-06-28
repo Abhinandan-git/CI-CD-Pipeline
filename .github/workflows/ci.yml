@@ -1,9 +1,11 @@
 name: CI Pipeline
 on:
   - push:
-      - branch: main, feat-*
+    - branch: main, feat-*
   - pull-request:
-      - branch: main
+    - branch: main
+  - commit:
+    - branch: feat-*
 
 jobs:
   build-and-test:
