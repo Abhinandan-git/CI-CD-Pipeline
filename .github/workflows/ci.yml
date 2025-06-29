@@ -80,3 +80,6 @@ jobs:
         run: |
           cd ..
           PYTHONPATH=. pytest tests/
+
+      - name: Trigger Backend Deploy to Render
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
