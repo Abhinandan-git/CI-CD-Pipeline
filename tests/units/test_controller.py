@@ -2,7 +2,7 @@ import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from ...src.database import models, controller
+from backend.src.database import models, controller
 
 # In-memory SQLite database
 TEST_DATABASE_URL = "sqlite:///:memory:"
