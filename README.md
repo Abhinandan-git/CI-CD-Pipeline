@@ -97,11 +97,7 @@ git clone https://github.com/abhinandan-git/ci-cd-pipeline.git
 cd ci-cd-pipeline
 ```
 
-### 2. Set Up Environment Variables
-
-Create `.env` files for both frontend and backend based on `.env.example`.
-
-### 3. Run Locally with Docker Compose
+### 2. Run Locally with Docker Compose
 
 ```bash
 docker-compose up --build
@@ -112,20 +108,11 @@ Access:
 * Frontend: `http://localhost:3000`
 * Backend API: `http://localhost:8000`
 
-### 4. Configure Vercel & Render
+### 3. Configure Vercel & Render
 
 * Connect frontend repo to Vercel via GitHub for auto-deploys
 * Connect backend repo or subdirectory to Render via GitHub or use a Render blueprint with Docker
 * Add environment variables via respective dashboards
-
----
-
-## ✅ Future Improvements
-
-* Add test coverage report to CI
-* Integrate Sentry for error tracking
-* Implement caching for dependencies
-* Add GitHub status badges to README
 
 ---
 

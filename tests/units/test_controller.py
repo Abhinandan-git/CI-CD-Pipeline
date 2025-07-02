@@ -24,15 +24,15 @@ def db_session():
 def test_create_todo(db_session):
     todo = controller.create_todo(db_session, "Test ToDo", "Testing description")
     assert todo.id is not None
-    assert todo.title == "Test ToDo"
-    assert todo.description == "Testing description"
+    assert todo.title == "Test ToDo" # type: ignore
+    assert todo.description == "Testing description" # type: ignore
     assert todo.completed is False
 
 def test_get_todo(db_session):
     created = controller.create_todo(db_session, "Fetch me")
-    fetched = controller.get_todo(db_session, created.id)
+    fetched = controller.get_todo(db_session, created.id) # type: ignore
     assert fetched is not None
-    assert fetched.id == created.id
+    assert fetched.id == created.id # type: ignore
 
 def test_get_all_todos(db_session):
     controller.create_todo(db_session, "First")
@@ -42,15 +42,15 @@ def test_get_all_todos(db_session):
 
 def test_update_todo(db_session):
     todo = controller.create_todo(db_session, "Old Title", "Old Desc")
-    updated = controller.update_todo(db_session, todo.id, title="New Title", completed=True)
-    assert updated.title == "New Title"
-    assert updated.completed is True
+    updated = controller.update_todo(db_session, todo.id, title="New Title", completed=True) # type: ignore
+    assert updated.title == "New Title" # type: ignore
+    assert updated.completed is True # type: ignore
 
 def test_delete_todo(db_session):
     todo = controller.create_todo(db_session, "Delete me")
-    success = controller.delete_todo(db_session, todo.id)
+    success = controller.delete_todo(db_session, todo.id) # type: ignore
     assert success is True
-    assert controller.get_todo(db_session, todo.id) is None
+    assert controller.get_todo(db_session, todo.id) is None # type: ignore
 
 def test_delete_nonexistent_todo(db_session):
     success = controller.delete_todo(db_session, 999)
