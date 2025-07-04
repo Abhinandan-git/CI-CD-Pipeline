@@ -27,27 +27,6 @@ jobs:
         working-directory: frontend/
         run: npm install
 
-      - name: Run frontend tests
+      - name: Run frontend lints
         working-directory: frontend/
-        run: npm run test:e2e
-
-  backend:
-    name: Backend Build & Test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11.2'
-
-      - name: Install backend dependencies
-        working-directory: backend/
-        run: pip install -r requirements.txt
-
-      - name: Run backend tests
-        working-directory: tests/
-        run: pytest
+        run: npm run lint

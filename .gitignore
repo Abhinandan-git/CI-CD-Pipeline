@@ -175,3 +175,5 @@ cython_debug/
 
 # Visual studio code files
 .vscode
+
+.next
