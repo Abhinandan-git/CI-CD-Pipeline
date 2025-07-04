@@ -24,47 +24,20 @@ jobs:
           node-version: '20'
 
       - name: Install frontend dependencies
-        working-directory: frontend
+        working-directory: frontend/
         run: npm install
 
       - name: Run frontend tests
-        working-directory: frontend
-        run: |
-          npx playwright install
-          npx playwright install-deps
-          npm run test:e2e
+        working-directory: frontend/
+        run: npm run test:e2e
 
   backend:
     name: Backend Build & Test
     runs-on: ubuntu-latest
 
-    services:
-      db:
-        image: postgres:15-bookworm
-        env:
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd="pg_isready"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Wait for Postgres to be ready
-        run: |
-          echo "Waiting for PostgreSQL to be ready..."
-          for i in {1..10}; do
-            nc -z localhost 5432 && echo "Postgres is up!" && break
-            echo "Still waiting..."
-            sleep 3
-          done
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -72,14 +45,9 @@ jobs:
           python-version: '3.11.2'
 
       - name: Install backend dependencies
-        working-directory: backend
+        working-directory: backend/
         run: pip install -r requirements.txt
 
       - name: Run backend tests
-        working-directory: backend
-        run: |
-          cd ..
-          PYTHONPATH=. pytest tests/
-
-      - name: Trigger Backend Deploy to Render
-        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
+        working-directory: tests/
+        run: pytest
