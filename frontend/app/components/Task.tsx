@@ -5,12 +5,14 @@ import React, { FormEventHandler, useState } from "react"
 import { FiEdit, FiTrash2 } from "react-icons/fi"
 import Modal from "./Modal"
 import { deleteTodo, editTodo } from "@/api"
+import { useRouter } from "next/navigation"
 
 interface TaskProp {
 	task: Todo
 }
 
 const Task: React.FC<TaskProp> = ({ task }) => {
+	const router = useRouter()
 	const [modalOpenEdit, setModalOpenEdit] = useState<boolean>(false);
 	const [modalOpenDelete, setModalOpenDelete] = useState<boolean>(false);
 
@@ -23,11 +25,13 @@ const Task: React.FC<TaskProp> = ({ task }) => {
       text: textToEdit,
     });
 		setModalOpenEdit(false)
+		router.refresh()
 	}
 
 	const handleDeleteTask = async (id: string) => {
 		await deleteTodo(id);
 		setModalOpenDelete(false)
+		router.refresh()
 	}
 		
 	return (

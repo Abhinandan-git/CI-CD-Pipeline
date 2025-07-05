@@ -1,6 +1,6 @@
 import { Todo } from "./types/tasks";
 
-const baseUrl = 'http://localhost:3001';
+const baseUrl = 'http://127.0.0.1:8000';
 
 export const getAllTodos = async (): Promise<Todo[]> => {
   const res = await fetch(`${baseUrl}/tasks`, { cache: 'no-store' });
