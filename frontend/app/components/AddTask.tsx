@@ -3,6 +3,8 @@
 import { AiOutlinePlus } from "react-icons/ai";
 import Modal from "./Modal";
 import { FormEventHandler, useState } from "react";
+import { addTodo } from "@/api";
+import { v4 as uuidv4 } from "uuid";
 
 const AddTask = () => {
 	const [modalOpen, setModalOpen] = useState<boolean>(false)
@@ -10,6 +12,10 @@ const AddTask = () => {
 
 	const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault()
+		await addTodo({
+      id: uuidv4(),
+      text: newTaskValue,
+    });
 		setNewTaskValue("")
 		setModalOpen(false)
 	}

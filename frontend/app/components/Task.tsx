@@ -4,6 +4,7 @@ import { Todo } from "@/types/tasks"
 import React, { FormEventHandler, useState } from "react"
 import { FiEdit, FiTrash2 } from "react-icons/fi"
 import Modal from "./Modal"
+import { deleteTodo, editTodo } from "@/api"
 
 interface TaskProp {
 	task: Todo
@@ -17,10 +18,15 @@ const Task: React.FC<TaskProp> = ({ task }) => {
 
 	const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault()
+		await editTodo({
+      id: task.id,
+      text: textToEdit,
+    });
 		setModalOpenEdit(false)
 	}
 
 	const handleDeleteTask = async (id: string) => {
+		await deleteTodo(id);
 		setModalOpenDelete(false)
 	}
 		
