@@ -1,6 +1,6 @@
 import { Todo } from "./types/tasks";
 
-const baseUrl = 'http://0.0.0.0:8000';
+const baseUrl = 'https://ci-cd-pipeline-xf9v.onrender.com';
 
 export const getAllTodos = async (): Promise<Todo[]> => {
   const res = await fetch(`${baseUrl}/tasks`, { cache: 'no-store' });
